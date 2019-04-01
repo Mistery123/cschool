@@ -49,7 +49,7 @@ int iniciarCuenta(){
             scanf("%f", &importeAPagar);
             cambio = (importeAPagar - precioTotal);
             if ( cambio < 0) {
-                printf("Te faltan insertar $ %.2f", cambio);
+                printf("Te faltan insertar $ %.2f", cambio*-1);
 		    }
 		    else {
 				printf("\nCambio: %.2f", cambio);
@@ -76,4 +76,5 @@ int iniciarCuenta(){
         }
     }
 }
+
 
