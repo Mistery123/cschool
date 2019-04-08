@@ -3,51 +3,35 @@
 #include <math.h>
 
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
-char* nombre[];
-float precioTotal, precioTemporal;
-int totalDeProductos = 0;
-int sigueIngresando = 1;
+char nombre[15];
+float preciototal, preciotemporal;
+int totaldeproductos = 0;
+int sigueingresando = 1;
 
-float faltante;
-float subtotal;
-float importeAPagar;
-float cambio;
-int deseaContinuar = 0;
+float faltante, subtotal, importeapagar, cambio;
 
-int iniciarCuenta();
+
 
 int main(int argc, char *argv[]){
-    
-    iniciarCuenta();
- return 0;
-}
 
-int iniciarCuenta(){
+     printf("Ingrese su nombre porfavor:\n");
+     scanf("%s", &nombre);
+     printf("Nombre: %s", nombre);
 
-    precioTotal = 0;
-    precioTemporal = 0;
-    totalDeProductos = 0;
-    subtotal = 0;
-    importeAPagar = 0;
-    cambio = 0;
-
-    printf("Ingrese su nombre porfavor:\n");
-
-    scanf("%s", &nombre);
-    printf("Nombre: %s", nombre);
-    
-    while(sigueIngresando){
+    do{
+        
         printf("\n\nPorfavor ingrese el precio:\n");
-        scanf("%f", &precioTemporal);
-        if(precioTemporal < 0){ //Si la cantidad es negativa
-            printf("\n\nCuenta Final: %.2f", precioTotal);
-            printf("\nTotal de productos: %d", totalDeProductos);
+        scanf("%f", &preciotemporal);
+        if(preciotemporal < 0){ //Si la cantidad es negativa
+
+            printf("\n\nCuenta Final: %.2f", preciototal);
+            printf("\nTotal de productos: %d", totaldeproductos);
             printf("\nIva: %.2f", subtotal * .16);
             printf("\nSubtotal: %.2f", subtotal);
 
             printf("\nEscriba el importe a pagar:\n");
-            scanf("%f", &importeAPagar);
-            cambio = (importeAPagar - precioTotal);
+            scanf("%f", &importeapagar);
+            cambio = (importeapagar - preciototal);
             if ( cambio < 0) {
                 printf("Te faltan insertar $ %.2f", cambio*-1);
 		    }
@@ -55,26 +39,44 @@ int iniciarCuenta(){
 				printf("\nCambio: %.2f", cambio);
 		    }
             printf("\nMuchas gracias por usar nuestros servicios %s,\n\n Desea continuar otra cuenta?\n\n 1 = Si\n 0 = No\n\n", nombre);
-            scanf("%d", &deseaContinuar);
-            
-            if(deseaContinuar == 1){
-				system("cls");
-                iniciarCuenta();
-                deseaContinuar = 0;
-            }else{
-                sigueIngresando = 0;
+            scanf("%d", &sigueingresando);
+
+            if(sigueingresando == 0){
+                break;
             }
+            
+            system("cls");
 
+
+            //Resetea todo para que vuelva a iniciar 
+                preciototal = 0;
+                preciotemporal = 0;
+                totaldeproductos = 0;
+                subtotal = 0;
+                importeapagar = 0;
+                cambio = 0;
+
+                printf("Ingrese su nombre porfavor:\n");
+                scanf("%s", &nombre);
+                printf("Nombre: %s", nombre);
+    
+
+      
         }else{ //Si es positiva
-            precioTotal = precioTotal + precioTemporal;
-            subtotal = (precioTotal / 1.16);
-            totalDeProductos = totalDeProductos + 1;
+            preciototal = preciototal + preciotemporal;
+            subtotal = (preciototal / 1.16);
+            totaldeproductos = totaldeproductos + 1;
 
-            printf("\n\nTotal Actual: %.2f", precioTotal);
-            printf("\nTotal de productos: %d", totalDeProductos);
+            printf("\n\nTotal Actual: %.2f", preciototal);
+            printf("\nTotal de productos: %d", totaldeproductos);
 
         }
-    }
+
+
+    }while(sigueingresando);
+
+ return 0;
 }
+
 
 
